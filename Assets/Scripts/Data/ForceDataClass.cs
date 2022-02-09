@@ -7,7 +7,6 @@ namespace CrusadeTracker
     public class UnitDataCard 
     {
         public UnitDataClass unitData;
-        public int UniqueID;
     }
 
     public class ForceDataClass

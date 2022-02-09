@@ -2,35 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace CrusadeTracker
 {
     public class UnitDataViewModel : MonoBehaviour
     {
         public UnitDataEventHandler eventHandler;
+        [SerializeField] ForceDataViewModel ForceScreen;
 
         public UnitDataClass CurrentUnitData;
         private Dictionary<string, UnitDataClass> UnitCards; // int GUI links to the UnitDataClass
 
         public GameObject EquipmentContentHome;
+        public List<GameObject> EquipmentCards = new List<GameObject>();
         public GameObject PrefabEquipmentCard;
-
-        public void Start()
-        {
-            NewUnit();
-        }
 
         public void NewUnit()
         {
             CurrentUnitData = new UnitDataClass();
         }
 
+        public void OpenUnit(UnitDataClass unit) 
+        {
+            CurrentUnitData = unit;
+
+            GetComponent<UnitWindow>().SetupUnitTexts(unit);
+            GameObject newEquip = CreateEquipmentCard();
+            DataCarrier carrier = newEquip.GetComponent<DataCarrier>();
+
+            foreach (EquipmentData equipData in unit.Equipment)
+            {
+                carrier.UID = equipData.UID;
+                carrier.name.text = equipData.EquipmentName;
+                carrier.quantity.text = equipData.Quantity.ToString();
+            }
+        }
+
+        public void ClearEquipment()
+        {
+            for (int i = EquipmentCards.Count; i < 0; i--)
+            {
+                Destroy(EquipmentCards[0]);
+                EquipmentCards.RemoveAt(0);
+            }
+        }
+
         public void SetUnitName(string newName)
         {
             CurrentUnitData.UnitName = newName;
+            ForceScreen.CurrentCardUpdater.unitName.text = newName;
         }
 
-        public void SetBattlefieldRole(Dropdown BattlefieldRoleDropdown)
+        public void SetBattlefieldRole(TMP_Dropdown BattlefieldRoleDropdown)
         {
             switch (BattlefieldRoleDropdown.value) 
             {
@@ -78,12 +102,33 @@ namespace CrusadeTracker
         {
             CurrentUnitData.UnitName = newType;
         }
+
+        public void UpdatePowerLevel(int value)
+        {
+            if (value > 0) ///ALL OF THESE NEED REMOVING
+                CurrentUnitData.PowerRating += value;
+            else
+                CurrentUnitData.PowerRating += value;
+            eventHandler.UpdatePowerLevel.Invoke(CurrentUnitData.PowerRating.ToString());
+            ForceScreen.CurrentCardUpdater.unitPL.text = CurrentUnitData.PowerRating.ToString() + " PL";
+        }
+
+        public void UpdateCrusadePoints(int value)
+        {
+            if (value > 0) ///ALL OF THESE NEED REMOVING
+                CurrentUnitData.CrusadePoints += value;
+            else
+                CurrentUnitData.CrusadePoints += value;
+            eventHandler.UpdateCrusadePoints.Invoke(CurrentUnitData.CrusadePoints.ToString());
+            ForceScreen.CurrentCardUpdater.unitCP.text = CurrentUnitData.CrusadePoints.ToString() + " CP";
+        }
+
         public void NewEquipment()
         {
             if (CurrentUnitData.Equipment == null)
                 CurrentUnitData.Equipment = new List<EquipmentData>();
-            GameObject newEquip = Instantiate(PrefabEquipmentCard, EquipmentContentHome.transform);
-            newEquip.transform.localPosition = new Vector3(0, -180 * CurrentUnitData.Equipment.Count);
+
+            GameObject newEquip = CreateEquipmentCard();
             DataCarrier carrier = newEquip.GetComponent<DataCarrier>();
             carrier.UID = Random.Range(0, 10000000000).ToString();
             bool duplicate = CheckDuplicateEquipmentUID(carrier);
@@ -102,8 +147,17 @@ namespace CrusadeTracker
             newEquipData.Quantity = 0;
 
             CurrentUnitData.Equipment.Add(newEquipData);
+            EquipmentCards.Add(newEquip);
 
             EquipmentContent.sizeDelta = new Vector2(EquipmentContent.sizeDelta.x, 180 * CurrentUnitData.Equipment.Count);
+        }
+
+        public GameObject CreateEquipmentCard()
+        {
+            GameObject newEquip = Instantiate(PrefabEquipmentCard, EquipmentContentHome.transform);
+            newEquip.transform.localPosition = new Vector3(0, -180 * CurrentUnitData.Equipment.Count);
+
+            return newEquip;
         }
 
         private bool CheckDuplicateEquipmentUID(DataCarrier carrier)

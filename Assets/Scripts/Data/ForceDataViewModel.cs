@@ -6,14 +6,48 @@ namespace CrusadeTracker
 {
     public class ForceDataViewModel : MonoBehaviour
     {
+        public ForceWindow ForceWindow;
         public ForceDataEventHandler eventHandler;
+        public UnitDataViewModel UnitScreen;
 
         private ForceDataClass ForceData;
-        public Dictionary<int, UnitDataClass> UnitDataDictionary;
+        public Dictionary<GameObject, UnitDataClass> UnitDataDictionary = new Dictionary<GameObject, UnitDataClass>();
+
+        public GameObject UnitsContentHome;
+        public List<GameObject> UnitCards = new List<GameObject>();
+        public CardUpdater CurrentCardUpdater;
+        public GameObject PrefabUnitCard;
 
         private void Start()
         {
-            NewForce();
+            LoadForce();
+        }
+
+        public void OnApplicationQuit()
+        {
+            SaveForce();
+        }
+
+        public void SaveForce()
+        {
+            SaveData.SaveForceData(ForceData);
+        }
+
+        public void LoadForce()
+        {
+            ForceData = SaveData.LoadForceData();
+            if (SaveData.LoadForceData() != null)
+            {
+                ForceWindow.SetupForceTexts(ForceData);
+                foreach(UnitDataCard unitData in ForceData.UnitCards)
+                {
+                    LoadUnit(unitData.unitData, ForceData.UnitCards.IndexOf(unitData));
+                }
+            }
+            else
+            {
+                NewForce();
+            }
         }
 
         public void NewForce() 
@@ -74,6 +108,72 @@ namespace CrusadeTracker
             else
                 ForceData.SupplyUsed += value;
             eventHandler.UpdateSupplyUsed.Invoke(ForceData.SupplyUsed.ToString());
+        }
+
+        public void AddNewUnit()
+        {
+            if (ForceData.UnitCards == null)
+                ForceData.UnitCards = new List<UnitDataCard>();
+            GameObject newUnit = Instantiate(PrefabUnitCard, UnitsContentHome.transform);
+            newUnit.transform.localPosition = new Vector3(0, -270 * ForceData.UnitCards.Count);
+            DataCarrier carrier = newUnit.GetComponent<DataCarrier>();
+            carrier.GO = newUnit;
+
+            UnitDataCard newUnitData = new UnitDataCard();
+            newUnitData.unitData = new UnitDataClass();
+
+            ForceData.UnitCards.Add(newUnitData);
+            UnitDataDictionary.Add(newUnit, newUnitData.unitData);
+            UnitCards.Add(newUnit);
+
+            CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
+            CurrentCardUpdater.ForceScreen = this;
+
+            OpenUnitScreen(newUnitData.unitData);
+        }
+
+        public void LoadUnit(UnitDataClass unit, int index)
+        {
+            if (ForceData.UnitCards == null)
+                ForceData.UnitCards = new List<UnitDataCard>();
+            GameObject newUnit = Instantiate(PrefabUnitCard, UnitsContentHome.transform);
+            newUnit.transform.localPosition = new Vector3(0, -270 * index);
+            DataCarrier carrier = newUnit.GetComponent<DataCarrier>();
+            carrier.GO = newUnit;
+
+            UnitDataCard newUnitData = new UnitDataCard();
+            newUnitData.unitData = unit;
+            UnitDataDictionary.Add(newUnit, newUnitData.unitData);
+            UnitCards.Add(newUnit);
+
+            CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
+            CurrentCardUpdater.ForceScreen = this;
+            CurrentCardUpdater.unitName.text = unit.UnitName;
+            CurrentCardUpdater.unitPL.text = unit.PowerRating.ToString() + " PL";
+            CurrentCardUpdater.unitCP.text = unit.CrusadePoints.ToString() + " CP";
+        }
+
+        public void OpenUnit(DataCarrier carrier) 
+        {
+            SaveForce();
+            if (UnitDataDictionary.ContainsKey(carrier.gameObject)) 
+            {
+                UnitDataClass unitData;
+                UnitDataDictionary.TryGetValue(carrier.GO, out unitData);
+                CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
+                OpenUnitScreen(unitData);
+            }
+        }
+
+        public void OpenUnitScreen(UnitDataClass unitData)
+        {
+            RectTransform UnitsContent = UnitsContentHome.transform.parent.GetComponent<RectTransform>();
+
+            UnitsContent.sizeDelta = new Vector2(UnitsContent.sizeDelta.x, 270 * ForceData.UnitCards.Count);
+            UnitScreen.CurrentUnitData = unitData;
+            UnitScreen.gameObject.SetActive(true);
+            ForceWindow.gameObject.SetActive(false);
+            UnitScreen.OpenUnit(unitData);
         }
     }
 }

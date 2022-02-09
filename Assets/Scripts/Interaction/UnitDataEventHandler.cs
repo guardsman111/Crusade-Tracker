@@ -5,5 +5,5 @@ using UnityEngine.Events;
 
 public class UnitDataEventHandler : MonoBehaviour
 {
-    public UnityEvent<string> UpdateBattlesPlayed, UpdateBattlesWon, UpdateSupplyLimit, UpdateSupplyUsed;
+    public UnityEvent<string> UpdatePowerLevel, UpdateCrusadePoints;
 }
