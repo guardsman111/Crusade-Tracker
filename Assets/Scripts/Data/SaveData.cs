@@ -11,15 +11,15 @@ namespace CrusadeTracker
         public static void SaveForceData(ForceDataClass data)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ForceDataClass));
-            var stream = new FileStream(Path.Combine(Application.persistentDataPath, "TestCrusadeFile.xml"), FileMode.Create);
+            var stream = new FileStream(Path.Combine(Application.persistentDataPath, data.CrusadeForceName + ".xml"), FileMode.Create);
             serializer.Serialize(stream, data);
             stream.Close();
         }
 
-        public static ForceDataClass LoadForceData()
+        public static ForceDataClass LoadForceData(string path)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ForceDataClass));
-            var stream = new FileStream(Path.Combine(Application.persistentDataPath, "TestCrusadeFile.xml"), FileMode.Open);
+            var stream = new FileStream(Path.Combine(path), FileMode.Open);
             ForceDataClass container = serializer.Deserialize(stream) as ForceDataClass;
             stream.Close();
 

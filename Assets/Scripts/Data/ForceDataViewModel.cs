@@ -18,11 +18,6 @@ namespace CrusadeTracker
         public CardUpdater CurrentCardUpdater;
         public GameObject PrefabUnitCard;
 
-        private void Start()
-        {
-            LoadForce();
-        }
-
         public void OnApplicationQuit()
         {
             SaveForce();
@@ -33,10 +28,10 @@ namespace CrusadeTracker
             SaveData.SaveForceData(ForceData);
         }
 
-        public void LoadForce()
+        public void LoadForce(string path)
         {
-            ForceData = SaveData.LoadForceData();
-            if (SaveData.LoadForceData() != null)
+            ForceData = SaveData.LoadForceData(path);
+            if (ForceData != null)
             {
                 ForceWindow.SetupForceTexts(ForceData);
                 foreach(UnitDataCard unitData in ForceData.UnitCards)
@@ -128,8 +123,6 @@ namespace CrusadeTracker
 
             CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
             CurrentCardUpdater.ForceScreen = this;
-
-            OpenUnitScreen(newUnitData.unitData);
         }
 
         public void LoadUnit(UnitDataClass unit, int index)

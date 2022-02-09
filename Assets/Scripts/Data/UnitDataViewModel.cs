@@ -11,6 +11,8 @@ namespace CrusadeTracker
         public UnitDataEventHandler eventHandler;
         [SerializeField] ForceDataViewModel ForceScreen;
 
+        public RectTransform EquipmentContent;
+
         public UnitDataClass CurrentUnitData;
         private Dictionary<string, UnitDataClass> UnitCards; // int GUI links to the UnitDataClass
 
@@ -26,22 +28,28 @@ namespace CrusadeTracker
         public void OpenUnit(UnitDataClass unit) 
         {
             CurrentUnitData = unit;
+            ClearEquipment();
 
             GetComponent<UnitWindow>().SetupUnitTexts(unit);
-            GameObject newEquip = CreateEquipmentCard();
-            DataCarrier carrier = newEquip.GetComponent<DataCarrier>();
 
             foreach (EquipmentData equipData in unit.Equipment)
             {
+                GameObject newEquip = CreateEquipmentCard();
+                DataCarrier carrier = newEquip.GetComponent<DataCarrier>();
                 carrier.UID = equipData.UID;
                 carrier.name.text = equipData.EquipmentName;
                 carrier.quantity.text = equipData.Quantity.ToString();
+                carrier.UnitScreen = this;
+
+                EquipmentCards.Add(newEquip);
             }
+
+            EquipmentContent.sizeDelta = new Vector2(EquipmentContent.sizeDelta.x, 180 * CurrentUnitData.Equipment.Count);
         }
 
         public void ClearEquipment()
         {
-            for (int i = EquipmentCards.Count; i < 0; i--)
+            for (int i = EquipmentCards.Count; i > 0; i--)
             {
                 Destroy(EquipmentCards[0]);
                 EquipmentCards.RemoveAt(0);
@@ -133,8 +141,6 @@ namespace CrusadeTracker
             carrier.UID = Random.Range(0, 10000000000).ToString();
             bool duplicate = CheckDuplicateEquipmentUID(carrier);
 
-            RectTransform EquipmentContent = EquipmentContentHome.transform.parent.GetComponent<RectTransform>();
-
             while (duplicate)
             {
                 carrier.UID = Random.Range(0, 10000000000).ToString();
@@ -145,6 +151,7 @@ namespace CrusadeTracker
             newEquipData.UID = carrier.UID;
             newEquipData.EquipmentName = "";
             newEquipData.Quantity = 0;
+            carrier.UnitScreen = this;
 
             CurrentUnitData.Equipment.Add(newEquipData);
             EquipmentCards.Add(newEquip);
@@ -155,7 +162,7 @@ namespace CrusadeTracker
         public GameObject CreateEquipmentCard()
         {
             GameObject newEquip = Instantiate(PrefabEquipmentCard, EquipmentContentHome.transform);
-            newEquip.transform.localPosition = new Vector3(0, -180 * CurrentUnitData.Equipment.Count);
+            newEquip.transform.localPosition = new Vector3(0, -180 * EquipmentCards.Count);
 
             return newEquip;
         }

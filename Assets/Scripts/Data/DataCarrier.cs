@@ -14,5 +14,17 @@ namespace CrusadeTracker {
         public TMP_InputField quantity;
         public string UID;
         public GameObject GO;
+        public UnitDataViewModel UnitScreen;
+
+        public void ChangeEquipmentName(string newName)
+        {
+            UnitScreen.CurrentUnitData.Equipment[UnitScreen.EquipmentCards.IndexOf(this.gameObject)].EquipmentName = newName;
+        }
+
+        public void ChangeEquipmentQuantity(string newQuantity)
+        {
+            UnitScreen.CurrentUnitData.Equipment[UnitScreen.EquipmentCards.IndexOf(this.gameObject)].Quantity = int.Parse(newQuantity);
+        }
     }
+
 }
