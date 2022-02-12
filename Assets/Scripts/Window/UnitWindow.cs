@@ -17,6 +17,7 @@ namespace CrusadeTracker
         public TMP_InputField PsychicPowers;
         public TMP_InputField WarlordTraits;
         public TMP_InputField Relics;
+        public TMP_InputField OtherAbilities;
 
         public TMP_Dropdown BattlefieldRole;
 
@@ -31,6 +32,7 @@ namespace CrusadeTracker
             PsychicPowers.text = unit.PsychicPowers;
             WarlordTraits.text = unit.WarlordTraits;
             Relics.text = unit.Relics;
+            OtherAbilities.text = unit.OtherAbilities;
 
             switch(unit.UnitBattlefieldRole)
             {

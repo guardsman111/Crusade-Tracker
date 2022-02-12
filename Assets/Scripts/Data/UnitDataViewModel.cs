@@ -108,7 +108,7 @@ namespace CrusadeTracker
 
         public void SetUnitType(string newType)
         {
-            CurrentUnitData.UnitName = newType;
+            CurrentUnitData.UnitType = newType;
         }
 
         public void UpdatePowerLevel(int value)

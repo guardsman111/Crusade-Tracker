@@ -123,6 +123,9 @@ namespace CrusadeTracker
 
             CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
             CurrentCardUpdater.ForceScreen = this;
+
+            RectTransform UnitsContent = UnitsContentHome.transform.parent.GetComponent<RectTransform>();
+            UnitsContent.sizeDelta = new Vector2(UnitsContent.sizeDelta.x, 270 * ForceData.UnitCards.Count);
         }
 
         public void LoadUnit(UnitDataClass unit, int index)

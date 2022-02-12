@@ -42,7 +42,7 @@ namespace CrusadeTracker
         public string UnitType;
         public List<EquipmentData> Equipment;
         public string PsychicPowers,WarlordTraits, Relics;
-        public string OtherUpgrades, OtherAbilities;
+        public string OtherAbilities;
 
         public int BattlesPlayed, BattlesSurvived;
         public int EnemyUnitsDestroyedThisBattle, EnemyUnitsDestroyedTotal;

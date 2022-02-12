@@ -4392,6 +4392,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5569864633355914858, guid: 4eeb1662b46209a46939c46485b8f1f5, type: 3}
   m_PrefabInstance: {fileID: 1328254793}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1346438778 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5569864633123462278, guid: 4eeb1662b46209a46939c46485b8f1f5, type: 3}
+  m_PrefabInstance: {fileID: 1036247073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1374165306
 GameObject:
   m_ObjectHideFlags: 0
@@ -5129,6 +5140,7 @@ MonoBehaviour:
   PsychicPowers: {fileID: 1710935720}
   WarlordTraits: {fileID: 1562790389}
   Relics: {fileID: 1271323502}
+  OtherAbilities: {fileID: 1346438778}
   BattlefieldRole: {fileID: 1975679424}
 --- !u!224 &1794904186 stripped
 RectTransform:
@@ -6060,7 +6072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 0, y: -160}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &2036489299
