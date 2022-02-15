@@ -9,6 +9,7 @@ namespace CrusadeTracker
         public ForceWindow ForceWindow;
         public ForceDataEventHandler eventHandler;
         public UnitDataViewModel UnitScreen;
+        public UnitTallyViewData TallyScreen;
 
         private ForceDataClass ForceData;
         public Dictionary<GameObject, UnitDataClass> UnitDataDictionary = new Dictionary<GameObject, UnitDataClass>();
@@ -17,6 +18,11 @@ namespace CrusadeTracker
         public List<GameObject> UnitCards = new List<GameObject>();
         public CardUpdater CurrentCardUpdater;
         public GameObject PrefabUnitCard;
+
+        public void OnApplicationPause()
+        {
+            SaveForce();
+        }
 
         public void OnApplicationQuit()
         {
@@ -68,41 +74,26 @@ namespace CrusadeTracker
 
         public void UpdateBattlesPlayed(int value)
         {
-            if(value > 0)
-                ForceData.BattlesPlayed += value;
-            else
-                ForceData.BattlesPlayed += value;
-
+            ForceData.BattlesPlayed += value;
             eventHandler.UpdateBattlesPlayed.Invoke(ForceData.BattlesPlayed.ToString());
         }
 
         public void UpdateBattlesWon(int value)
         {
-            if (value > 0)
-                ForceData.BattlesWon += value;
-            else
-                ForceData.BattlesWon += value;
+            ForceData.BattlesWon += value;
             eventHandler.UpdateBattlesWon.Invoke(ForceData.BattlesWon.ToString());
         }
 
         public void UpdateSupplyLimit(int value)
         {
-            if (value > 0)
-                ForceData.SupplyLimit += value;
-            else
-                ForceData.SupplyLimit += value;
-            eventHandler.UpdateSupplyLimit.Invoke(ForceData.SupplyLimit.ToString());
+            ForceData.SupplyLimit += value;
+            eventHandler.UpdateSupplyLimit.Invoke(ForceData.SupplyLimit.ToString() + " CP");
         }
 
         public void UpdateSupplyUsed(int value)
         {
-            if (value > 0)
-            {
-                ForceData.SupplyUsed += value;
-            }
-            else
-                ForceData.SupplyUsed += value;
-            eventHandler.UpdateSupplyUsed.Invoke(ForceData.SupplyUsed.ToString());
+            ForceData.SupplyUsed += value;
+            eventHandler.UpdateSupplyUsed.Invoke(ForceData.SupplyUsed.ToString() + " CP");
         }
 
         public void AddNewUnit()
@@ -123,6 +114,7 @@ namespace CrusadeTracker
 
             CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
             CurrentCardUpdater.ForceScreen = this;
+            CurrentCardUpdater.TallyScreen = TallyScreen;
 
             RectTransform UnitsContent = UnitsContentHome.transform.parent.GetComponent<RectTransform>();
             UnitsContent.sizeDelta = new Vector2(UnitsContent.sizeDelta.x, 270 * ForceData.UnitCards.Count);
@@ -144,9 +136,13 @@ namespace CrusadeTracker
 
             CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
             CurrentCardUpdater.ForceScreen = this;
+            CurrentCardUpdater.TallyScreen = TallyScreen;
             CurrentCardUpdater.unitName.text = unit.UnitName;
             CurrentCardUpdater.unitPL.text = unit.PowerRating.ToString() + " PL";
             CurrentCardUpdater.unitCP.text = unit.CrusadePoints.ToString() + " CP";
+
+            RectTransform UnitsContent = UnitsContentHome.transform.parent.GetComponent<RectTransform>();
+            UnitsContent.sizeDelta = new Vector2(UnitsContent.sizeDelta.x, 270 * ForceData.UnitCards.Count);
         }
 
         public void OpenUnit(DataCarrier carrier) 
@@ -161,15 +157,32 @@ namespace CrusadeTracker
             }
         }
 
+        public void OpenUnitTallies(DataCarrier carrier)
+        {
+            SaveForce();
+            if (UnitDataDictionary.ContainsKey(carrier.gameObject))
+            {
+                UnitDataClass unitData;
+                UnitDataDictionary.TryGetValue(carrier.GO, out unitData);
+                CurrentCardUpdater = carrier.GetComponent<CardUpdater>();
+                OpenTallyScreen(unitData);
+            }
+        }
+
         public void OpenUnitScreen(UnitDataClass unitData)
         {
-            RectTransform UnitsContent = UnitsContentHome.transform.parent.GetComponent<RectTransform>();
-
-            UnitsContent.sizeDelta = new Vector2(UnitsContent.sizeDelta.x, 270 * ForceData.UnitCards.Count);
             UnitScreen.CurrentUnitData = unitData;
             UnitScreen.gameObject.SetActive(true);
             ForceWindow.gameObject.SetActive(false);
             UnitScreen.OpenUnit(unitData);
+        }
+
+        public void OpenTallyScreen(UnitDataClass unitData)
+        {
+            TallyScreen.CurrentUnitData = unitData;
+            TallyScreen.gameObject.SetActive(true);
+            ForceWindow.gameObject.SetActive(false);
+            TallyScreen.OpenUnit(unitData);
         }
     }
 }

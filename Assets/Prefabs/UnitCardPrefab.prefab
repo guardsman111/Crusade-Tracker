@@ -195,6 +195,7 @@ MonoBehaviour:
   quantity: {fileID: 0}
   UID: 
   GO: {fileID: 1481881676901549415}
+  UnitScreen: {fileID: 0}
 --- !u!114 &5328219258355292988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForceScreen: {fileID: 0}
+  TallyScreen: {fileID: 0}
   unitName: {fileID: 1481881676511237579}
   unitPL: {fileID: 1481881677433332769}
   unitCP: {fileID: 1481881677743372397}
@@ -488,7 +490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 Supply
+  m_text: 0 CP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
@@ -564,6 +566,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1481881676901549414}
     m_Modifications:
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5328219258355292988}
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenCardTallies
+      objectReference: {fileID: 0}
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CrusadeTracker.CardUpdater, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 32284301727007020, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1688510533005682872, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
       propertyPath: m_Name
       value: Tallies

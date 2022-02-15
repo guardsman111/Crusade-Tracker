@@ -25,12 +25,8 @@ namespace CrusadeTracker
             PlayerName.text = unit.PlayerName;
             BattlesPlayed.text = unit.BattlesPlayed.ToString();
             BattlesWon.text = unit.BattlesWon.ToString();
-            SupplyLimit.text = unit.SupplyLimit.ToString();
-        }
-
-        public void SetSupplyUsed(string usedTotal)
-        {
-            SupplyUsed.text = usedTotal;
+            SupplyLimit.text = unit.SupplyLimit.ToString() + " CP";
+            SupplyUsed.text = unit.SupplyUsed.ToString() + " CP";
         }
     }
 }

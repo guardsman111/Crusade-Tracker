@@ -8,6 +8,7 @@ namespace CrusadeTracker
     public class CardUpdater : MonoBehaviour
     {
         public ForceDataViewModel ForceScreen;
+        public UnitTallyViewData TallyScreen;
 
         public TextMeshProUGUI unitName;
         public TextMeshProUGUI unitPL;
@@ -20,7 +21,7 @@ namespace CrusadeTracker
 
         public void OpenCardTallies()
         {
-
+            ForceScreen.OpenUnitTallies(GetComponent<DataCarrier>());
         }
     }
 }

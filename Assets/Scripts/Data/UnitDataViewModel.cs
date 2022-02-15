@@ -113,21 +113,16 @@ namespace CrusadeTracker
 
         public void UpdatePowerLevel(int value)
         {
-            if (value > 0) ///ALL OF THESE NEED REMOVING
-                CurrentUnitData.PowerRating += value;
-            else
-                CurrentUnitData.PowerRating += value;
-            eventHandler.UpdatePowerLevel.Invoke(CurrentUnitData.PowerRating.ToString());
+            CurrentUnitData.PowerRating += value;
+            eventHandler.UpdatePowerLevel.Invoke(CurrentUnitData.PowerRating.ToString() + " PL");
             ForceScreen.CurrentCardUpdater.unitPL.text = CurrentUnitData.PowerRating.ToString() + " PL";
         }
 
         public void UpdateCrusadePoints(int value)
         {
-            if (value > 0) ///ALL OF THESE NEED REMOVING
-                CurrentUnitData.CrusadePoints += value;
-            else
-                CurrentUnitData.CrusadePoints += value;
-            eventHandler.UpdateCrusadePoints.Invoke(CurrentUnitData.CrusadePoints.ToString());
+            CurrentUnitData.CrusadePoints += value;
+            ForceScreen.UpdateSupplyUsed(value);
+            eventHandler.UpdateCrusadePoints.Invoke(CurrentUnitData.CrusadePoints.ToString() + " CP");
             ForceScreen.CurrentCardUpdater.unitCP.text = CurrentUnitData.CrusadePoints.ToString() + " CP";
         }
 
