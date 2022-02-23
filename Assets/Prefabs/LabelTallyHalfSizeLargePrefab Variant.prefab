@@ -13,9 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 436283289210961076, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_text
-      value: 'Power
-
-        Level'
+      value: Power Level
       objectReference: {fileID: 0}
     - target: {fileID: 436283289210961076, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_fontSize
@@ -27,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 436283289310819461, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -219
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 436283291165513257, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_Name
-      value: LabelTallyHalfSizeLargePrefab
+      value: LabelTallyHalfSizeLargePrefab Variant
       objectReference: {fileID: 0}
     - target: {fileID: 436283291165513258, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_Pivot.x
@@ -117,13 +115,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2081020613446005694, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -146
+      objectReference: {fileID: 0}
     - target: {fileID: 4647614112512722762, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -214
+      value: -148
       objectReference: {fileID: 0}
     - target: {fileID: 4647614113386837375, guid: b9dfe5568934eeb459a63af223615da6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -214
+      value: -148
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9dfe5568934eeb459a63af223615da6, type: 3}

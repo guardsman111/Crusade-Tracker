@@ -108,15 +108,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ff8e3aecae3859d46a5d6216f96b57a6, type: 2}
+  m_sharedMaterial: {fileID: 4303041351225994326, guid: ff8e3aecae3859d46a5d6216f96b57a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290772821
-  m_fontColor: {r: 0.33490568, g: 1, b: 0.747912, a: 1}
+    rgba: 4288994028
+  m_fontColor: {r: 0.92549026, g: 0.854902, b: 0.6431373, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -243,15 +243,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: XP Points
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4152003773de7784094c2bb85e620da3, type: 2}
+  m_sharedMaterial: {fileID: 4303041351225994326, guid: 4152003773de7784094c2bb85e620da3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292118581
-  m_fontColor: {r: 0.20784314, g: 0.53333336, b: 0.83137256, a: 1}
+    rgba: 4285419306
+  m_fontColor: {r: 0.16470589, g: 0.30980393, b: 0.43137258, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -268,8 +268,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -324,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 4691303828080041181, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6bd45431524dcfb4895ea9d73500ad39, type: 3}
+      objectReference: {fileID: 21300000, guid: d14ab300d49e3b344bfa19ca9fda9ee3, type: 3}
     - target: {fileID: 5076217853935789843, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -411,7 +411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7254622115777099513, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c8e88ae280326642852ef687fda5d09, type: 3}
