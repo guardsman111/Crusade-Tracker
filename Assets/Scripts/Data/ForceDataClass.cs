@@ -18,5 +18,6 @@ namespace CrusadeTracker
         public int SupplyUsed;
         public List<UnitDataCard> UnitCards; // int UID links to the UnitDataClass
 
+        public List<string> Goals, Information, NotableVictories;
     }
 }

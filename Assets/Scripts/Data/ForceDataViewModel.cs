@@ -19,6 +19,8 @@ namespace CrusadeTracker
         public CardUpdater CurrentCardUpdater;
         public GameObject PrefabUnitCard;
 
+        public List<GameObject> GoalsGOs, InformationGOs, NotableVictoriesGOs; 
+
         public void OnApplicationPause()
         {
             SaveForce();
@@ -145,6 +147,11 @@ namespace CrusadeTracker
             UnitsContent.sizeDelta = new Vector2(UnitsContent.sizeDelta.x, 270 * ForceData.UnitCards.Count);
         }
 
+        public void DeleteUnit() 
+        { 
+        
+        }
+
         public void OpenUnit(DataCarrier carrier) 
         {
             SaveForce();
@@ -183,6 +190,11 @@ namespace CrusadeTracker
             TallyScreen.gameObject.SetActive(true);
             ForceWindow.gameObject.SetActive(false);
             TallyScreen.OpenUnit(unitData);
+        }
+
+        public void AddStringCard(int type) 
+        {
+            
         }
     }
 }
